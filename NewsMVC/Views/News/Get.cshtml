@@ -1,0 +1,67 @@
+﻿@using System.Data
+@using System.Text;
+@model IEnumerable<News>
+
+@{
+    ViewData["Title"] = "Fetching Data from WebAPI Using Data";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayName("Title")</th>
+            <th>@Html.DisplayName("")</th>
+            <th>@Html.DisplayName("")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td><a onclick="editNews(@row.Id, @row.Title,@row.Content,@row.image, @row.Created_at,@row.publication_date,@row.AuthorId)" asp-controller="News" asp-action="Index" asp-route-id="@row.Id">@row.Title</a></td>
+                <td>
+                    <a onclick="editNews(@row.Id, @row.Title,@row.Content,@row.image, @row.Created_at,@row.publication_date,@row.AuthorId)" asp-controller="News" asp-action="Index" asp-route-id="@row.Id">
+                    @if (row.image.Length != 0)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(row.image)" alt="Image" width="240" />
+                    }
+                    else{
+                        <img src="~/placeholder.png" alt="Image" width="240" />
+                    }</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary" onclick="editNews(@row.Id, @row.Title,@row.Content,@row.image, @row.Created_at,@row.publication_date,@row.AuthorId)" asp-controller="News" asp-action="Put" asp-route-id="@row.Id">
+                        Edit
+                    </a>
+                    <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary" onclick="return confirm('Are you sure you want to delete )" asp-controller="News" asp-action="Delete" asp-route-id="@row.Id">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function editNews(id, title, content, Image, created_at, publicationDate, authorId) {
+        var data = {
+            Id: id,
+            Title: title,
+            Content: content,
+            image: Image,
+            Created_at: created_at,
+            publication_date: publicationDate,
+            AuthorId: authorId
+        };
+        $.ajax({
+            url: '/Authors/Put',
+            type: 'PUT',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function (response) {
+                // Handle the response if needed
+                // ...
+            }
+        });
+    }
+</script>

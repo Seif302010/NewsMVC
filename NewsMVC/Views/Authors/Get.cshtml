@@ -1,0 +1,56 @@
+﻿@using System.Data
+@model IEnumerable<Author>
+
+@{
+    ViewData["Title"] = "Fetching Data from WebAPI Using Data";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayName("Name")</th>
+            <th>@Html.DisplayName("CreatedAt")</th>
+            <th>@Html.DisplayName("LastUpdatedAt")</th>
+            <th>@Html.DisplayName("")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td>@row.Name</td>
+                <td>@row.Created_at</td>
+                <td>@row.updated_at</td>
+                <td>
+                    <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary" onclick="editAuthor(@row.Id, @row.Name, @row.Created_at, @row.updated_at)" asp-controller="Authors" asp-action="Put" asp-route-id="@row.Id">
+                        Edit
+                    </a>
+                    <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary" onclick="return confirm('Are you sure you want to delete @row.Name')" asp-controller="Authors" asp-action="Delete" asp-route-id="@row.Id">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function editAuthor(id, name, created_at, updated_at) {
+        var data = {
+            Id: id,
+            Name: name,
+            Created_at: created_at,
+            updated_at: updated_at
+        };
+        $.ajax({
+            url: '/Authors/Put',
+            type: 'PUT',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function (response) {
+                // Handle the response if needed
+                // ...
+            }
+        });
+    }
+</script>
