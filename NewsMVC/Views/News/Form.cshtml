@@ -1,5 +1,4 @@
-﻿@model News
-
+﻿@model NewsDto
 @{
     var action = Model?.Id > 0 ? "Put": "Post";
     ViewData["Title"] = $"{(Model?.Id > 0 ? "Update" : "Add")} News";
