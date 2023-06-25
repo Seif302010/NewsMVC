@@ -127,7 +127,7 @@ namespace NewsMVC.Controllers
 
         public async Task<IActionResult> Put(NewsDto news)
             {
-                NewsDto obj = new()
+            NewsDto obj = new()
                 {
                     Title = news.Title,
                     Content = news.Content,
@@ -135,7 +135,7 @@ namespace NewsMVC.Controllers
                     publication_date = news.publication_date,
                     AuthorId = news.AuthorId
                 };
-                if (obj.Title != null && obj.Content != null && obj.publication_date != null && obj.AuthorId != null && news.Id > 0)
+                if (news.Id > 0)
                 {
                     using (var client = new HttpClient())
                     {

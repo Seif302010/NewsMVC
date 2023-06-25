@@ -33,7 +33,7 @@
                     <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary" onclick="editNews(@row.Id, @row.Title,@row.Content,@row.image, @row.Created_at,@row.publication_date,@row.AuthorId)" asp-controller="News" asp-action="Put" asp-route-id="@row.Id">
                         Edit
                     </a>
-                    <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary" onclick="return confirm('Are you sure you want to delete )" asp-controller="News" asp-action="Delete" asp-route-id="@row.Id">
+                    <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary" onclick="return confirm('Are you sure you want to delete ')" asp-controller="News" asp-action="Delete" asp-route-id="@row.Id">
                         Delete
                     </a>
                 </td>

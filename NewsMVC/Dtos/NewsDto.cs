@@ -1,7 +1,7 @@
 ﻿//using Humanizer.Localisation;
 using System.IO;
 
-namespace NewsMVC.Models.DomainModels
+namespace NewsMVC.Dtos
 {
     public class NewsDto : News
     {
